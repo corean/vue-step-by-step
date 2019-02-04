@@ -1,68 +1,49 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title></title>
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.css">
     <style>
-        .color-red {
-            color: red;
-        }
-
-        .color-blue {
-            color: blue;
+        .container {
+            padding-top: 40px;
         }
     </style>
 </head>
 <body>
-<div id="root">
-    <h1 :class="className">Hello, world</h1>
-    <h2>{{ reversedMessage }}</h2>
-    <ul>
-        <li v-for="name in names" v-text="name"></li>
-    </ul>
-    <input type="text" id="text" v-model="newName" v-on:keyup.enter="addName">
-    <button @click="addName" v-bind:title="title">Add Name</button>
+<div id="root" class="container">
+    <message title="Hello world" body="Lorem ipsum dolor sit amet, consectetur adipiscing elit."></message>
+    <message title="corean"
+             body="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"></message>
 
-    <h2>component Tasks</h2>
-    <task-list></task-list>
 </div>
-
-<script src="./vue.js"></script>
-<script src="./main.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.22/vue.js"></script>
 <script>
-
-  var app = new Vue({
-    el: '#root',
-    // components: {
-    //   taskList : 'task-list'
-    // },
-    data: {
-      message: 'hello World',
-      names: [
-        'Joe', 'Mary', 'Jane', 'Jack',
-      ],
-      newName: 'Susan',
-      title: 'Now the title is being set through Javascript',
-      className: 'color-red',
-
-    },
-    methods: {
-      addName() {
-        this.names.push(this.newName);
-        this.newName = '';
-      },
-    },
-    computed: {
-      reversedMessage() {
-        return this.message.split('').reverse().join('');
-      },
+  Vue.component('message', {
+    props: ['title', 'body'],
+    template: `<article class="message" v-show="isVisible">
+        <div class="message-header">
+            <p>{{ title }}</p>
+            <button class="delete" aria-label="delete" @click="isVisible = false"></button>
+        </div>
+        <div class="message-body">
+            {{ body }}
+        </div>
+    </article>`,
+    data() {
+      return {
+        isVisible: true,
+      };
     },
   });
 
-
-
+  new Vue({
+    el: '#root',
+  });
 </script>
 </body>
+
 </html>
