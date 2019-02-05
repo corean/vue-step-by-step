@@ -22,23 +22,7 @@
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.22/vue.js"></script>
 <script>
-  Vue.component('message', {
-    props: ['title', 'body'],
-    template: `<article class="message" v-show="isVisible">
-        <div class="message-header">
-            <p>{{ title }}</p>
-            <button class="delete" aria-label="delete" @click="isVisible = false"></button>
-        </div>
-        <div class="message-body">
-            {{ body }}
-        </div>
-    </article>`,
-    data() {
-      return {
-        isVisible: true,
-      };
-    },
-  });
+
 
   new Vue({
     el: '#root',
